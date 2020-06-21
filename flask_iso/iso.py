@@ -1,4 +1,4 @@
-from datetime import date
+from datetime import date, time
 from typing import Union
 
 from flask import Blueprint, Flask
@@ -9,6 +9,8 @@ class CustomJSONEncoder(JSONEncoder):
     def default(self, obj):
         try:
             if isinstance(obj, date):
+                return obj.isoformat()
+            if isinstance(obj, time):
                 return obj.isoformat()
             iterable = iter(obj)
         except TypeError:
